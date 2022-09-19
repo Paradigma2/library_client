@@ -1,0 +1,26 @@
+<form>
+  <table>
+    <tr>
+      <td>Korisnicko ime:</td>
+      <td>
+        <input type='text' [(ngModel)]='username' name='username'>
+      </td>
+    </tr>
+    <tr>
+      <td>Sifra:</td>
+      <td>
+        <input type='password' [(ngModel)]='password' name='password'>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button (click)='login()'>Uloguj se</button>
+      </td>
+      <td>
+        <button><a routerLink='/register'>Registruj se</a></button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<ngb-alert *ngIf="!alertClosed" (close)="alertClosed = true">{{ alertMessage }}</ngb-alert>
