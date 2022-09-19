@@ -1,10 +1,10 @@
-.card {
+.book {
   width: 500px;
   height: 120px;
   border: 2px;
   border-color: black;
 }
 
-.cardWrapper {
+.bookWrapper {
   width: 700px;
 }

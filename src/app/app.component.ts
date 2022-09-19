@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from './services/auth.service';
-import { User } from './models/user.model';
+import { User } from './models/user';
 
 export let browserRefresh = false;
 @Component({
