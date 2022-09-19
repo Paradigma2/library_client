@@ -1,0 +1,10 @@
+.book {
+  width: 500px;
+  height: 120px;
+  border: 2px;
+  border-color: black;
+}
+
+.bookWrapper {
+  width: 700px;
+}

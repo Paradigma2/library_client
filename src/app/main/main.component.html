@@ -1,0 +1,57 @@
+<p>main works!</p>
+
+<div class="menu">
+  <div>
+    <button *ngIf="!authenticated()"><a routerLink="/register">Registracija</a></button>
+  </div>
+  <div>
+    <form>
+      <table>
+        <tr>
+          <td>Knjiga:</td>
+          <td><input type='text' [(ngModel)]='searchQuery' name='searchQuery'></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button (click)='search()'>Pretrazi</button></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <div class='bookWrapper'>
+    <table class='table'
+           *ngIf='books.length'>
+      <thead>
+        <tr>
+          <th>
+            <button class='btn btn-primary'>
+             Image
+            </button>
+          </th>
+          <th>Title</th>
+          <th>Year</th>
+          <th>Publisher</th>
+          <th>Status</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let book of filteredBooks'>
+          <td>
+            <img *ngIf='showImage'
+                 [src]='book.photo.filename'
+                 [title]='book.title'
+                 [style.width.px]='imageWidth'
+                 [style.margin.px]='imageMargin'>
+          </td>
+          <td>
+              {{ book.title }}
+          </td>
+          <td>{{ book.year }}</td>
+          <td>{{ book.publisher }}</td>
+          <td>{{ book.status  }}</td>
+          <td>{{ book.authors }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,44 +1,14 @@
-<div class="promotionWrapper">
-  <div class="promotion" *ngFor="let promo of promoted">
-    <img src='http://localhost:3000/{{ promo.photo }}' width="100px">
-    <p>{{ promo.description }}</p>
-    <p>{{ promo.address }}</p>
-    <p>{{ promo.price }}</p>
-  </div>
-</div>
 
-<div class="cardWrapper">
-  <div class="card" *ngFor="let books of top_picks">
-    <img src='http://localhost:3000/{{ book.photo.filename }}' width="100px">
-    <span>{{ realty.description }}</span>
-    <span>{{ realty.address }}</span>
-    <span>{{ realty.price }}</span>
-  </div>
-</div>
 
 <div class="homeOptions">
-  <form>
-    <table>
-      <tr>
-        <td>Grad:</td>
-        <td><input type='text' [(ngModel)]='searchQuery' name='searchQuery'></td>
-      </tr>
-      <tr>
-        <td>Cena od:</td>
-        <td><input type='number' [(ngModel)]='priceFrom' name='priceFrom'></td>
-      </tr>
-      <tr>
-        <td>Cena do:</td>
-        <td><input type='number' [(ngModel)]='priceTo' name='priceTo'></td>
-      </tr>
-      <tr>
-        <td colspan="2"><button (click)='search()'>Pretrazi</button></td>
-      </tr>
-    </table>
-  </form>
-
   <br/>
-
-  <button *ngIf="authenticated()"><a routerLink='/realty/new'>Oglasi svoju nekretninu</a></button>
+  <button *ngIf="authenticated()"><app-main>Glavni meni:</app-main></button>
+  <div class="bookWrapper">
+  <div class="book" *ngFor="let book of books">
+    <img src='http://localhost:3000/{{ book.photo.filename }}' width="100px">
+    <span>{{ book.title }}</span>
+    <span>{{ book.year }}</span>
+  </div>
+</div>
 </div>
 

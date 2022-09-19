@@ -1,6 +1,6 @@
-import {Photo} from './photo.model';
+import {Photo} from './photo';
 
-export class User {
+export interface User {
   id: number;
   username: string;
   password: string;
