@@ -9,6 +9,7 @@ export interface User {
   lastName: string;
   address: string;
   phone: string;
+  lendingsCount: number;
   role: string;
   status: string;
   photo: Photo;

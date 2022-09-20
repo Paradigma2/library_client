@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpService } from '../services/http.service';
 import { User } from '../models/user';
+import { Photo } from '../models/photo';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,8 @@ export class RegisterComponent implements OnInit {
 
   username: string;
   email: string;
-  country: string;
-  city: string;
+  address: string;
+  phone: string;
   password: string;
   passwordCheck: string;
   firstName: string;
@@ -30,20 +31,30 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     if (this.check()) {
-      const formData = new FormData();
-      formData.append('username', this.username);
-      formData.append('email', this.email);
-      formData.append('password', this.password);
-      formData.append('country', this.country);
-      formData.append('city', this.city);
-      formData.append('firstName', this.firstName);
-      formData.append('lastName', this.lastName);
-      formData.append('profilePicture', this.profilePicture);
-      formData.append('type', 'User');
-      formData.append('role', 'basic');
+      let photoId = 1;
+      if (this.profilePicture) {
+        const formDataPhoto = new FormData();
+        formDataPhoto.append('profilePicture', this.profilePicture);
 
-      const headers = new HttpHeaders({ enctype: 'multipart/form-data' });
-      this.httpService.post('users', formData, headers).subscribe((user: User) => {
+        const headers = new HttpHeaders({ enctype: 'multipart/form-data' });
+        this.httpService.post('photos', formDataPhoto, headers).subscribe((photo: Photo) => {
+          if (photo) { photoId = photo.id; }
+        }, (err) => {
+          this.alertMessage = 'Doslo je do greske';
+          this.alertClosed = false;
+        });
+      }
+
+      const formDataUser = new FormData();
+      formDataUser.append('username', this.username);
+      formDataUser.append('email', this.email);
+      formDataUser.append('password', this.password);
+      formDataUser.append('address', this.address);
+      formDataUser.append('firstName', this.firstName);
+      formDataUser.append('lastName', this.lastName);
+      formDataUser.append('photoId', photoId.toString());
+
+      this.httpService.post('users', formDataUser).subscribe((user: User) => {
         if (user) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.router.navigate(['home']);
@@ -74,11 +85,12 @@ export class RegisterComponent implements OnInit {
       return false;
     }
 
-    const regExp = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,24}/g;
-    if (! regExp.test(this.password)) {
-      this.alertMessage = 'Sifra mora imati najmanje 8, a najvise 24 karaktera. Mora sadrzati bar jedno malo i veliko slovo, bar jednu cifru i jedan specijalan karakter!';
+    const regExp = /(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&#])([A-Za-z]{1})[A-Za-z\d$@$!%*?&#]{7,11}/g;
+    console.log(regExp.test(this.password));
+    if (!regExp.test(this.password)) {
+      this.alertMessage = 'Sifra mora imati najmanje 8, a najvise 12 karaktera. Mora sadrzati bar jedno malo i veliko slovo, bar jednu cifru i jedan specijalan karakter!';
       this.alertClosed = false;
-      return true; // change to false to enable
+      return false; // change to false to enable
     }
     if (this.password !== this.passwordCheck) {
       this.alertMessage = 'Sifre se ne podudaraju!';

@@ -1,40 +1,57 @@
-<div class="headerdiv" style="text-align:center">
-  <header>Biblioteka</header>
-</div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" [routerLink]="['/home']" href="#!">
-        <b>Biblioteka</b>
-      </a>
+      <a class="navbar-brand" [routerLink]="['/home']" href="#!"><b>BIBLIOTEKA</b></a>
     </div>
 
-    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-      <!-- Left Side Of Navbar -->
-      <ul class="nav navbar-nav navbar">
-          <li class="nav-item">
-            <a *ngIf="!authenticated() || currentUserRole() === 'basic'" class="navbar-brand" [routerLink]="['/home']" href="#!">Pocetna</a>
-          </li>
-          <!-- <li>
-            <a *ngIf="currentUserRole() === 'basic' || currentUserRole() === 'agent'" class="navbar-brand" [routerLink]="['/inbox']" href="#!">Poruke</a>
-          </li> -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="navbar-link" [routerLink]="['/home']" href="#!">Pocetna</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="authenticated()" class="navbar-link" href="#!" (click)="signOut()">Napredna pretraga</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="authenticated()" class="navbar-link" [routerLink]="['/register']" href="#!">Zaduzene knjige</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="authenticated()" class="navbar-link" [routerLink]="['/login']" href="#!">Istorija zaduzenja</a>
+        </li>
       </ul>
+      <!-- Left links -->
 
-      <!-- Right Side Of Navbar -->
-      <ul class="nav navbar-nav-right">
-          <li class="nav-item">
-            <a *ngIf="authenticated()" class="navbar-brand" [routerLink]="['/user', currentUser().id]" href="#!">Moj Nalog</a>
-          </li>
-          <li class="nav-item">
-            <a *ngIf="authenticated()" class="navbar-brand" href="#!" (click)="signOut()">Izloguj se</a>
-          </li>
-          <li class="nav-item">
-            <a *ngIf="!authenticated()" class="navbar-brand" [routerLink]="['/register']" href="#!">Registruj se</a>
-          </li>
-          <li class="nav-item">
-            <a *ngIf="!authenticated()" class="navbar-brand" [routerLink]="['/login']" href="#!">Uloguj se</a>
-          </li>
-      </ul>
+      <!-- Search form -->
+      <form class="d-flex input-group w-auto">
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Type query"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-primary" type="button">
+          Pretraga
+        </button>
+      </form>
+
+      <div class="d-flex align-items-center">
+        <button *ngIf="authenticated()" type="button" class="btn btn-link px-3 me-2" (click)="signOut()">
+          Izloguj se
+        </button>
+        <button *ngIf="!authenticated()" type="button" class="btn btn-link px-3 me-2" [routerLink]="['/login']">
+          Uloguj se
+        </button>
+        <button *ngIf="!authenticated()" type="button" class="btn btn-primary me-3" [routerLink]="['/register']">
+          Registruj se
+        </button>
+        <a
+          class="btn btn-dark px-3"
+          href="https://github.com/mdbootstrap/mdb-ui-kit"
+          role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
     </div>
   </div>
 </nav>

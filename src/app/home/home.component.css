@@ -8,3 +8,32 @@
 .bookWrapper {
   width: 700px;
 }
+.header {
+  margin-top: 0px;
+  height: 60px;
+  min-height: 60px;
+  font-size: large;
+}
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  background-color: whitesmoke;
+}
+ div.book {
+   margin-top: 10px
+ }
+
+ .table {
+   margin-top: 10px
+ }
+
+ a {
+   text-decoration: none;
+ }
+
+ a:hover {
+   text-decoration: underline;
+ }

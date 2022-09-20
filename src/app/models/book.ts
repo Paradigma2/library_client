@@ -8,7 +8,8 @@ export interface Book{
   year: number;
   language: string;
   authors: string;
-  status: string;
+  stock: number;
+  averageScore: number;
   photo: Photo;
   genres: Genre[];
 }

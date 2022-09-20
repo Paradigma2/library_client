@@ -1,8 +1,7 @@
 
-
 <div class="homeOptions">
   <br/>
-  <button *ngIf="authenticated()"><app-main>Glavni meni:</app-main></button>
+  <div *ngIf="authenticated()"><app-main></app-main></div>
   <div class="bookWrapper">
   <div class="book" *ngFor="let book of books">
     <img src='http://localhost:3000/{{ book.photo.filename }}' width="100px">
@@ -11,4 +10,12 @@
   </div>
 </div>
 </div>
-
+<div class="footer">
+  <footer>
+    <button class='btn btn-outline-secondary'
+    style='width:80px'
+    >
+  <i class='fa fa-chevron-left'></i> Back
+</button>
+  </footer>
+</div>
